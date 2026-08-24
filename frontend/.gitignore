@@ -1,0 +1,11 @@
+# Frontend Dependencies & Build Output
+node_modules/
+dist/
+dist-ssr/
+build/
+.env.local
+.env.*.local
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
