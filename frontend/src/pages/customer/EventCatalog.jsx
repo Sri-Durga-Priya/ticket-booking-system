@@ -356,7 +356,7 @@ export default function EventCatalog() {
                 {/* Card Footer CTA */}
                 <div style={{ marginTop: 'auto', paddingTop: '1rem', borderTop: '1px solid var(--border-subtle)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                   <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                    By {event.organiser?.name || 'TicketNow Organiser'}
+                    By {event.organiser?.name || 'Event Organiser'}
                   </span>
 
                   <Link to={`/events/${event._id}`} className="btn btn-primary btn-sm">

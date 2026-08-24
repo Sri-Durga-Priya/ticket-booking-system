@@ -29,7 +29,7 @@ const Navbar = ({ socketConnected, apiHealthy }) => {
       <div className="navbar-inner">
         <Link to="/" className="nav-brand">
           <Ticket className="w-6 h-6 text-indigo-400" />
-          <span>Ticket<span className="nav-brand-gradient">Now</span></span>
+          <span>Ticket <span className="nav-brand-gradient">Booking System</span></span>
           <span className="badge badge-live" style={{ marginLeft: '0.5rem', fontSize: '0.65rem' }}>
             <span className="pulse-dot" style={{ color: socketConnected ? '#10b981' : '#f59e0b' }}></span>
             {socketConnected ? 'Live Real-time' : 'Reconnecting...'}
@@ -421,8 +421,8 @@ export default function App() {
             <div className="footer-inner">
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <Ticket className="w-5 h-5 text-indigo-400" />
-                <span style={{ fontWeight: 700, color: '#fff' }}>TicketNow Platform</span>
-                <span>— Live MERN Ticket Booking Engine</span>
+                <span style={{ fontWeight: 700, color: '#fff' }}>Ticket Booking System</span>
+                <span>— Live MERN Platform</span>
               </div>
               <div>
                 <span>Concurrency-Protected &bull; Socket.io Synced &bull; Node-cron Automated</span>

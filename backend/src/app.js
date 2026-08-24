@@ -56,7 +56,7 @@ app.get('/api/health', (req, res) => {
     status: 'ok',
     dbConnected: dbStatus.isConnected,
     success: true,
-    service: 'TicketNow API Server',
+    service: 'Ticket Booking System API Server',
     timestamp: new Date().toISOString(),
     uptime: `${Math.floor(process.uptime())}s`,
     database: dbStatus,
@@ -72,7 +72,7 @@ app.get('/api/health', (req, res) => {
 app.get('/api', (req, res) => {
   res.json({
     success: true,
-    message: 'Welcome to TicketNow API — Real-time Movie & Concert Ticket Booking Engine',
+    message: 'Welcome to Ticket Booking System API — Real-time Movie & Concert Ticket Booking Engine',
     version: '1.0.0',
     endpoints: {
       health: '/api/health',

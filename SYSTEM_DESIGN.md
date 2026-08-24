@@ -1,4 +1,4 @@
-# TicketNow — System Design Document
+# Ticket Booking System — System Design Document
 
 **Author:** DeepMind Antigravity  
 **Tech Stack:** Node.js, Express, MongoDB, Socket.io, React (Vite)  
@@ -14,7 +14,7 @@ $$\text{available} \longrightarrow \text{held (TTL countdown)} \longrightarrow \
 When a user selects seats on the Visual Seat Map, a multi-seat atomic hold is initiated with an expiration timestamp calculated as `holdExpiresAt = now + HOLD_TTL_MINUTES` (default: 10 minutes).
 
 ### Dual-Layer Expiry Architecture
-To ensure real-time responsiveness without sacrificing consistency, TicketNow implements a **hybrid active sweeper and lazy evaluation pattern**:
+To ensure real-time responsiveness without sacrificing consistency, Ticket Booking System implements a **hybrid active sweeper and lazy evaluation pattern**:
 
 1. **Active Background Sweeper (`sweepExpiredHolds`)**: A `node-cron` scheduled worker runs every 10 seconds. It identifies seats where `status == 'held'` and `holdExpiresAt < new Date()`, updates their status back to `available`, and broadcasts a `seat:batch_updated` event over Socket.io to the relevant show room (`show:<showId>`).
 2. **Lazy Safety Net**: All read operations (such as `GET /api/shows/:id/seats`) and write operations evaluate `holdExpiresAt < now` directly within their database filters. Stale holds are automatically ignored, preventing abandoned sessions from ever blocking legitimate checkout attempts even under network latency.
@@ -23,7 +23,7 @@ To ensure real-time responsiveness without sacrificing consistency, TicketNow im
 
 ## 2. Concurrency Prevention Approach
 
-Preventing double-booking during high-demand ticket sales is the core engineering challenge. TicketNow enforces **hard database-level atomic conditional updates** combined with a **compound unique constraint**.
+Preventing double-booking during high-demand ticket sales is the core engineering challenge. Ticket Booking System enforces **hard database-level atomic conditional updates** combined with a **compound unique constraint**.
 
 ### The Chosen Pattern: Atomic Conditional `findOneAndUpdate`
 Rather than relying on distributed locks (e.g. Redlock) or in-memory mutexes which introduce multi-server synchronization overhead and single-point failures, we leverage MongoDB document-level write atomicity:

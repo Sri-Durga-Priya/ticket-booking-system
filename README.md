@@ -1,4 +1,4 @@
-# 🎟️ TicketNow — Real-Time Movie & Concert Ticket Booking Platform (MERN Stack)
+# 🎟️ Ticket Booking System — Real-Time Movie & Concert Ticket Booking Platform (MERN Stack)
 
 > A full-stack MERN platform engineered for **hard database-level concurrency protection**, **live visual seat maps**, **time-boxed seat holds**, **automated cascading waitlists**, and **verified QR admission passes**.
 
@@ -23,7 +23,7 @@
 ## 🏛️ System Design Write-Up
 
 ### 1. Seat Hold & TTL Mechanism
-Seat selection in TicketNow is governed by a strict state lifecycle:
+Seat selection in the Ticket Booking System is governed by a strict state lifecycle:
 $$\text{available} \longrightarrow \text{held (TTL Running)} \longrightarrow \text{booked}$$
 
 - **10-Minute Hold TTL**: When a customer clicks a seat, the system issues a time-boxed hold (`status = 'held'`, `heldBy = customerId`, `holdExpiresAt = now + 10m`).
@@ -32,7 +32,7 @@ $$\text{available} \longrightarrow \text{held (TTL Running)} \longrightarrow \te
   2. **Lazy Expiry Safety Net**: Every read and write conditional filter treats expired holds (`holdExpiresAt < now`) as instantly available, guaranteeing that stale records can never block legitimate booking attempts even if background jobs experience delay.
 
 ### 2. Atomic Concurrency Prevention Approach
-To eliminate the risk of double-booking under high-load ticket sales, TicketNow implements **Database-Level Atomic Conditional Updates** paired with a **Compound Unique Index**:
+To eliminate the risk of double-booking under high-load ticket sales, the Ticket Booking System implements **Database-Level Atomic Conditional Updates** paired with a **Compound Unique Index**:
 
 ```javascript
 // ShowSeat atomic conditional lock
@@ -58,12 +58,14 @@ const lockedSeat = await ShowSeat.findOneAndUpdate(
 
 ### 3. Waitlist Auto-Assignment & Cascading Flow
 When an event category reaches 100% capacity:
-1. **FIFO Queue Ordering**: Customers join a category waitlist indexed by `Waitlist.(show, category, status, joinedAt)`.
-2. **Instant Cancellation Trigger**: When a confirmed booking is cancelled via `PATCH /api/bookings/:id/cancel`, the system immediately executes `assignSeatToNextInWaitlist`.
-3. **Automated Dispatch**: The `#1` customer in line is atomically transitioned to `status: 'offered'`, the freed `ShowSeat` is locked exclusively for them, and a private 15-minute claim token is generated and delivered via both WebSocket alert (`waitlist:offered`) and Nodemailer email.
+1. Customers join a category-specific waitlist, prioritized strictly by FIFO registration timestamp (`joinedAt`).
+2. When a cancellation occurs via `PATCH /api/bookings/:id/cancel`, the system immediately queries the queue for the next waiting customer.
+3. The `#1` candidate is transitioned to `status = 'offered'`, the freed `ShowSeat` is placed into a reserved hold exclusively for them, and a **15-minute claim token** is issued.
+4. The customer is alerted through real-time WebSocket notifications (`waitlist:offered`) and an automated HTML email with a direct claim pass.
 
 ### 4. Time-Limited Offer Handling
-- **Cascading Sweeper**: If the offer is not claimed within 15 minutes, `sweepExpiredWaitlistOffers` automatically marks the entry `expired` and immediately cascades the seat to the next person in line.
+- If the customer completes checkout within 15 minutes, the seat is confirmed and the waitlist entry becomes `claimed`.
+- If the 15-minute timer expires, the background worker (`sweepExpiredWaitlistOffers`, every 15s) marks the entry `expired` and immediately cascades the seat to the next person in line.
 - If the waitlist queue is empty, the seat reverts to `available` for general public booking.
 
 ---
@@ -106,7 +108,7 @@ When an event category reaches 100% capacity:
 - `GET /api/venues/:id` — Get venue layout coordinates
 
 ### Events & Shows (`/api/events` & `/api/shows`)
-- `GET /api/events` — Catalog with category & city filters
+- `GET /api/events` — Catalog with category, date, time & city filters
 - `POST /api/events` — Create movie/concert listing (Organiser)
 - `POST /api/shows` — Schedule show & **automatically generate `ShowSeat` matrix** (Organiser)
 - `GET /api/shows/:id/seats` — Fetch visual seat map with real-time statuses & pricing

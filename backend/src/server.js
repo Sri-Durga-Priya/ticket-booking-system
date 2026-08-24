@@ -41,7 +41,7 @@ const startServer = async () => {
     // Start HTTP Server on 0.0.0.0
     httpServer.listen(PORT, '0.0.0.0', () => {
       console.log(`====================================================`);
-      console.log(` TicketNow Server running in ${process.env.NODE_ENV || 'development'} mode`);
+      console.log(` Ticket Booking System Server running in ${process.env.NODE_ENV || 'development'} mode`);
       console.log(` Port: ${PORT}`);
       console.log(` Health: http://localhost:${PORT}/api/health`);
       console.log(` Sockets & Sweepers: Active`);

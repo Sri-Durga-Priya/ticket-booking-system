@@ -130,7 +130,7 @@ export const sendTicketConfirmationEmail = async (bookingId) => {
       <body>
         <div class="card">
           <div class="header">
-            <h1 style="margin: 0; font-size: 24px; font-weight: 800;">TicketNow E-Ticket</h1>
+            <h1 style="margin: 0; font-size: 24px; font-weight: 800;">Ticket Booking System E-Ticket</h1>
             <p style="margin: 4px 0 0; opacity: 0.9; font-size: 14px;">Your Official Admission Pass</p>
           </div>
           
@@ -178,7 +178,7 @@ export const sendTicketConfirmationEmail = async (bookingId) => {
           </div>
 
           <div class="footer">
-            TicketNow Real-Time Booking Platform &bull; Concurrency Protected &bull; Need help? Support@ticketnow.local
+            Ticket Booking System Platform &bull; Concurrency Protected &bull; Need help? support@ticketbooking.local
           </div>
         </div>
       </body>
@@ -187,7 +187,7 @@ export const sendTicketConfirmationEmail = async (bookingId) => {
 
     const transporter = await getTransporter();
     const mailOptions = {
-      from: process.env.EMAIL_FROM || '"TicketNow Support" <tickets@ticketnow.local>',
+      from: process.env.EMAIL_FROM || '"Ticket Booking System Support" <tickets@ticketbooking.local>',
       to: customer.email,
       subject: `🎟️ Your Tickets for ${event.title} [${booking.bookingReference}]`,
       html: htmlContent,
@@ -215,7 +215,7 @@ export const sendWaitlistOfferEmail = async ({ customerEmail, customerName, even
   try {
     const transporter = await getTransporter();
     const mailOptions = {
-      from: process.env.EMAIL_FROM || '"TicketNow Waitlist" <waitlist@ticketnow.local>',
+      from: process.env.EMAIL_FROM || '"Ticket Booking System Waitlist" <waitlist@ticketbooking.local>',
       to: customerEmail,
       subject: `✨ Good News! A seat opened up for ${eventTitle}`,
       html: `

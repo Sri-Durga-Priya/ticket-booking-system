@@ -1,12 +1,13 @@
 {
-  "name": "ticketnow-backend",
+  "name": "ticket-booking-system-backend",
   "version": "1.0.0",
-  "description": "Backend API for TicketNow - Movie & Concert Ticket Booking Platform",
+  "description": "Backend API for Ticket Booking System - Movie & Concert Platform",
   "main": "src/server.js",
   "type": "module",
   "scripts": {
     "start": "node src/server.js",
-    "dev": "nodemon src/server.js"
+    "dev": "nodemon src/server.js",
+    "db:diagnose": "node scripts/diagnose-db.js"
   },
   "dependencies": {
     "bcryptjs": "^3.0.2",

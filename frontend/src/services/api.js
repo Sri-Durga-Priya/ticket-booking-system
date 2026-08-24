@@ -54,7 +54,7 @@ const request = async (endpoint, options = {}) => {
 
     if (isNetworkFailure) {
       throw new ApiError(
-        `Can't reach TicketNow server at ${API_BASE}. Please verify the backend server is running on port 5000 and try again shortly.`,
+        `Can't reach Ticket Booking System server at ${API_BASE}. Please verify the backend server is running on port 5000 and try again shortly.`,
         0
       );
     }
