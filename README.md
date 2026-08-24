@@ -1,4 +1,4 @@
-# 🎟️ TicketNow — Real-Time Movie & Concert Ticket Booking Platform (MERN Stack)
+# 🎟️ Ticket Booking System — Real-Time Movie & Concert Ticket Booking Platform (MERN Stack)
 
 > A full-stack MERN platform engineered for **hard database-level concurrency protection**, **live visual seat maps**, **time-boxed seat holds**, **automated cascading waitlists**, and **verified QR admission passes**.
 
