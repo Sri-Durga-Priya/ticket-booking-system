@@ -203,16 +203,16 @@ Run the end-to-end test suites covering all 12 platform milestones:
 ```bash
 cd backend
 
-node tests/test-models.js                # Database Models & Concurrency Indexes (Task 2)
-node tests/test-auth.js                  # Authentication & RBAC (Task 3)
-node tests/test-venues.js                # Admin Venue Grid Designer (Task 4)
-node tests/test-events-shows.js          # Organiser Events & Shows (Task 5)
-node tests/test-seatmap.js               # Visual Seat Map & Socket Sync (Task 7)
-node tests/test-concurrency-booking.js   # Atomic Seat Holds & 409 Conflict Protection (Task 8)
-node tests/test-qr-email-verify.js       # Dynamic QR Passes & Email Delivery (Task 9)
-node tests/test-waitlist-cascade.js      # FIFO Waitlist & 15m Expiry Cascades (Task 10)
-node tests/test-cancellation-cascade.js  # Cancellation & Instant Cascade Trigger (Task 11)
-node tests/test-analytics.js             # Executive Revenue & Occupancy Analytics (Task 12)
+node tests/test-models.js                # Database Models & Concurrency Indexes 
+node tests/test-auth.js                  # Authentication & RBAC 
+node tests/test-venues.js                # Admin Venue Grid Designer 
+node tests/test-events-shows.js          # Organiser Events & Shows 
+node tests/test-seatmap.js               # Visual Seat Map & Socket Sync
+node tests/test-concurrency-booking.js   # Atomic Seat Holds & 409 Conflict Protection 
+node tests/test-qr-email-verify.js       # Dynamic QR Passes & Email Delivery 
+node tests/test-waitlist-cascade.js      # FIFO Waitlist & 15m Expiry Cascades 
+node tests/test-cancellation-cascade.js  # Cancellation & Instant Cascade Trigger 
+node tests/test-analytics.js             # Executive Revenue & Occupancy Analytics 
 ```
 
 ---
@@ -224,3 +224,13 @@ node tests/test-analytics.js             # Executive Revenue & Occupancy Analyti
 | 🎟️ **Customer** | `customer@ticketnow.local` | `password123` | Browse shows, visual seat selection, book tickets, `/my-bookings`, waitlists |
 | 🧑‍💼 **Organiser** | `organiser@ticketnow.local` | `password123` | Create events, schedule shows, `/organiser/analytics` dashboard |
 | 🛡️ **Admin** | `admin@ticketnow.local` | `password123` | Visual layout editor (`/admin/venues`), seat layout paint-brush, platform oversight |
+
+## 🚀 Live Demo
+
+* **Frontend:** [ticket-booking-system-alpha-five.vercel.app](https://ticket-booking-system-alpha-five.vercel.app/)
+* **Backend:** [ticket-booking-system-4-vjbj.onrender.com](https://ticket-booking-system-4-vjbj.onrender.com)
+
+### 🌐 Deployment
+
+* Frontend is deployed on **Vercel**
+* Backend is deployed on **Render**
